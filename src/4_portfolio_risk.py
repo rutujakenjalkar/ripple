@@ -1,8 +1,7 @@
 import os
 import numpy as np
 import pandas as pd
-from src.factor_data import map_contract_to_yahoo
-
+from src.factor_data import Fast_map_contract
 
 def run_stage_4():
   print("--- RUNNING STAGE 4: PORTFOLIO BETA AGGREGATION ---")
@@ -21,7 +20,7 @@ def run_stage_4():
   beta_df = pd.read_csv(beta_path, index_col=0)
 
   # 2. Map Excel contracts to Yahoo Finance Tickers
-  portfolio_df["ticker"] = portfolio_df["contract"].apply(map_contract_to_yahoo)
+  portfolio_df["ticker"] = portfolio_df["contract"].apply(Fast_map_contract)
 
   # 3. Compute Portfolio Asset Weights (W) using actual Signed Notionals
   # Weight = Signed Notional / Total Portfolio Gross Absolute Value
